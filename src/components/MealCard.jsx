@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
-export default function MealCard({title, image, price, description}) {
-    
+export default function MealCard({id, title, image, price, description, addItemToCart}) {
 
     return (
         <div className="meal-item">
@@ -11,7 +10,7 @@ export default function MealCard({title, image, price, description}) {
                 <div className="meal-item-price"><p>{price}</p></div>
                 <div className='meal-item-description'>{description}</div>
                 <div className='cart-item-actions'>
-                     <button>Add to cart</button>
+                     <button onClick={addItemToCart}>Add to cart</button>
                 </div>
             </article>
         </div>

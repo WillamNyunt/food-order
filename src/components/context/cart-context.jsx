@@ -9,7 +9,7 @@ const CartContextDefaultValues = {
 };
 
 
-const CartContext = createContext(CartContextDefaultValues);
+export const CartContext = createContext(CartContextDefaultValues);
 
 
 export const CartProvider = ({children}) => {
