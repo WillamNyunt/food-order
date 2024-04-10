@@ -1,4 +1,4 @@
-import Cart from "./components/cart";
+import MainHeader from "./components/MainHeader";
 import MealList from "./components/MealList";
 import {CartProvider } from "./components/context/cart-context";
 import { useEffect } from "react";
@@ -6,7 +6,7 @@ import { useEffect } from "react";
 function App() {
   return (
     <CartProvider>
-      <Cart />
+      <MainHeader />
       <MealList/>
     </CartProvider>
   );
