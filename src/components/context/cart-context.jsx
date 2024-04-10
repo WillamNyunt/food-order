@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const CartContextDefaultValues = {
     items: [],
@@ -54,9 +54,16 @@ export const CartProvider = ({children}) => {
         setCartItems([]);
     };
 
+    const getTotalAmount = () => {
+        const totalAmount = cartItems.reduce((acc, cartItem) => {
+            return acc + cartItem.price * cartItem.amount;
+        }, 0);
+        return totalAmount.toFixed(2);
+    };
+
     const cartContextProviderValues = {
         items: cartItems,
-        totalAmount: 0,
+        totalAmount: getTotalAmount(),
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
         clearCart: clearCartHandler
