@@ -65,7 +65,6 @@ export const CartProvider = ({children}) => {
 
     const getTotalPrice = () => {
         const totalPrice = cartItems.types.reduce((acc, type) => {
-            console.log(acc, type.price, type.amount)
             return Number(acc) +  Number(type.price) *  Number(type.amount);
         }, 0);
         return totalPrice.toFixed(2);

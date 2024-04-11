@@ -14,7 +14,7 @@ export default function MainHeader(props) {
                 <img src={Logo} title='Meal Logo' />
                 <h1>Meal App</h1>
             </div>
-            <button onClick={modalCtx.setModalOpen}>Cart<span> ({cartCtx.items.amount})</span>
+            <button onClick={() => modalCtx.setModalOpen('Cart')}>Cart<span> ({cartCtx.items.amount})</span>
             </button>
             <CartModal/>
         </div>

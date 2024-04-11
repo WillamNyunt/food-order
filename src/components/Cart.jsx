@@ -9,6 +9,7 @@ export default function Cart(props) {
     return (
         <div className='cart'>
             <h2>Cart</h2>
+            {cartCtx.items.amount === 0 && <p>No items in cart</p>}
             {cartCtx &&
                 <ul>{
                     cartCtx.items.types.map(item => {
@@ -27,11 +28,14 @@ export default function Cart(props) {
                     })
                 }</ul>
             }
-            {cartCtx.totalPrice > 0 &&
-                <div className='cart-total'>
-                    <h3>Total Amount</h3>
-                    <div>£{cartCtx.totalPrice}</div>
-                </div>}
+            <div className='cart-total'>
+                <h4>Total Amount</h4>
+                {cartCtx.totalPrice > 0 ? <span>£{cartCtx.totalPrice}</span> : <div>£0</div>}
+            </div>
+            <div className='cart-actions'>
+                <button>Proceed to checkout</button>
+                <button onClick={cartCtx.clearCart}>Clear Cart</button>
+            </div>
         </div>
     )
 }

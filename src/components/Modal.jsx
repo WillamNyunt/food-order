@@ -5,8 +5,9 @@ import { ModalContext } from "../context/modal-context";
 
 export default function Modal({children}) {
     const modalCtx = useContext(ModalContext);
+    
     return createPortal(
-        <Dialog open={modalCtx.modalOpen} onClose={modalCtx.setModalOpen} className="modal">
+        <Dialog open={modalCtx.modal.modalOpen} onClose={modalCtx.setModalOpen} className="modal">
             {children}
             <button onClick={modalCtx.setModalClose}>Cancel</button>
         </Dialog>,

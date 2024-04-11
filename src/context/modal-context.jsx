@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from 'react';
 
 const ModalContextDefaultValues = {
     modalOpen: false,
+    modalType: '',
     setModalOpen: () => {},
     setModalClose: () => {}
 };
@@ -9,18 +10,41 @@ const ModalContextDefaultValues = {
 export const ModalContext = createContext(ModalContextDefaultValues);
 
 export const ModalProvider = ({children}) => {
-    const [modal, setModal] = useState(false);
+    const [modal, setModal] = useState({
+        modalOpen: false,
+        modalType: ''
+    });
 
     const setModalClose = () => {
-        setModal(false);
+        setModal(prevModal => {
+            return {
+                ...prevModal,
+                modalOpen: false
+            };
+        });
     };
 
-    const setModalOpen = () => {
-        setModal(true);
+    const setModalOpen = (type) => {
+        setModal(prevModal => {
+            return {
+                ...prevModal,
+                modalOpen: true,
+                modalType: type
+            };
+        });
     };
+
+    const setModalType = (type) => {
+        setModalType(prevModal => {
+            return {
+                ...prevModal,
+                modalType: type
+            };
+        });
+    }
 
     const modalContextProviderValues = {
-        modalOpen: modal,
+        modal: modal,
         setModalOpen,
         setModalClose
     };
