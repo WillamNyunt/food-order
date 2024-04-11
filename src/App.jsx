@@ -1,7 +1,6 @@
 import MainHeader from "./components/MainHeader";
 import MealList from "./components/MealList";
-import {CartProvider } from "./components/context/cart-context";
-import { useEffect } from "react";
+import {CartProvider } from "./context/cart-context";
 
 function App() {
   return (

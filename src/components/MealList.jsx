@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import MealCard from './MealCard'
-import { CartContext } from './context/cart-context'
+import { CartContext } from '../context/cart-context'
 
 export default function MealList(props) {
     const [meals, setMeals] = useState([])

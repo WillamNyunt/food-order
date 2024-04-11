@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Logo from '../assets/logo.jpg'
-import { CartContext } from './context/cart-context'
+import { CartContext } from '../context/cart-context'
 
 export default function MainHeader(props) {
     const cartCtx = useContext(CartContext)

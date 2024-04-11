@@ -18,17 +18,8 @@ export const CartProvider = ({children}) => {
     const addItemToCartHandler = (item) => {
         setCartItems((prevCartItems) => {
             const updatedCartItems = [...prevCartItems];
-            const existingCartItem = updatedCartItems.find((cartItem) => cartItem.id === item.id);
-            if (existingCartItem) {
-                const updatedItem = {
-                    ...existingCartItem,
-                    amount: existingCartItem.amount + item.amount
-                };
-                const existingCartItemIndex = updatedCartItems.findIndex((cartItem) => cartItem.id === item.id);
-                updatedCartItems[existingCartItemIndex] = updatedItem;
-            } else {
-                updatedCartItems.push(item);
-            }
+            updatedCartItems.push(item);
+            console.log(updatedCartItems)
             return updatedCartItems;
         });
     };
