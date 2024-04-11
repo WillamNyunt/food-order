@@ -13,30 +13,31 @@ export const CartContext = createContext(CartContextDefaultValues);
 
 export const CartProvider = ({children}) => {
     const [cartItems, setCartItems] = useState({
-        items: [],
-        totalItemAmount: 0
+        types: [],
+        amount: 0
     });
 
     const addItemToCartHandler = (item) => {
         setCartItems((prevCartItems) => {
-            const existingCartItem = prevCartItems.items.find((cartItem) => cartItem.id === item.id);
-            const existingCartItemIndex = prevCartItems.items.findIndex((cartItem) => cartItem.id === item.id);
-            const updatedCartItems = [...prevCartItems.items];
+            const existingCartItem = prevCartItems.types.find((cartItem) => cartItem.id === item.id);
+            const existingCartItemIndex = prevCartItems.types.findIndex((cartItem) => cartItem.id === item.id);
+            const updatedCartItems = [...prevCartItems.types];
             
             if (existingCartItem) {
-                console.log('aready exists')
                 const updatedItem = {
                     ...existingCartItem,
-                    totalItemAmount: existingCartItem.totalItemAmount + 1
+                    amount: existingCartItem.amount + 1
                 };
                 updatedCartItems[existingCartItemIndex] = updatedItem;
             } else {
-                const newItem = {...item, totalItemAmount: 1};
+                const newItem = {...item, amount: 1};
                 updatedCartItems.push(newItem);
             }
+
+            console.log(updatedCartItems);
             return {
-                items: updatedCartItems,
-                totalItemAmount: prevCartItems.totalItemAmount + 1
+                types: updatedCartItems,
+                amount: prevCartItems.amount + 1
             };
         });
     };
@@ -45,12 +46,12 @@ export const CartProvider = ({children}) => {
         setCartItems((prevCartItems) => {
             const existingCartItem = prevCartItems.find((cartItem) => cartItem.id === id);
             const existingCartItemIndex = prevCartItems.findIndex((cartItem) => cartItem.id === id);
-            if (existingCartItem.totalItemAmount === 1) {
+            if (existingCartItem.amount === 1) {
                 return prevCartItems.filter((cartItem) => cartItem.id !== id);
             } else {
                 const updatedItem = {
                     ...existingCartItem,
-                    totalItemAmount: existingCartItem.totalItemAmount - 1
+                    amount: existingCartItem.amount - 1
                 };
                 prevCartItems[existingCartItemIndex] = updatedItem;
                 return prevCartItems;
@@ -63,15 +64,16 @@ export const CartProvider = ({children}) => {
     };
 
     const getTotalPrice = () => {
-        const totalAmount = cartItems.items.reduce((acc, cartItem) => {
-            return acc + cartItem.price * cartItem.amount;
+        const totalPrice = cartItems.types.reduce((acc, type) => {
+            console.log(acc, type.price, type.amount)
+            return Number(acc) +  Number(type.price) *  Number(type.amount);
         }, 0);
-        return totalAmount.toFixed(2);
+        return totalPrice.toFixed(2);
     };
 
     const cartContextProviderValues = {
         items: cartItems,
-        totalAmount: getTotalPrice(),
+        totalPrice: getTotalPrice(),
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
         clearCart: clearCartHandler
