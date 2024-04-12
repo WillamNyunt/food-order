@@ -4,7 +4,7 @@ import { CartContext } from '../context/cart-context'
 import CartModal from './CartModal'
 import { ModalContext } from '../context/modal-context'
 
-export default function MainHeader(props) {
+export default function MainHeader() {
     const cartCtx = useContext(CartContext)
     const modalCtx = useContext(ModalContext)
 
@@ -14,7 +14,7 @@ export default function MainHeader(props) {
                 <img src={Logo} title='Meal Logo' />
                 <h1>Meal App</h1>
             </div>
-            <button onClick={() => modalCtx.setModalOpen('Cart')}>Cart<span> ({cartCtx.items.amount})</span>
+            <button onClick={() =>  modalCtx.dispatchModal({type: 'OPEN', payload: 'CART'})}>Cart<span> ({cartCtx.items.amount})</span>
             </button>
             <CartModal/>
         </div>
