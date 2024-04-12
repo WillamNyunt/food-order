@@ -42,7 +42,7 @@ export default function Cart(props) {
                 {cartCtx.totalPrice > 0 ? <span>£{cartCtx.totalPrice}</span> : <div>£0</div>}
             </div>
             <div className='cart-actions'>
-                <button>Proceed to checkout</button>
+                <button onClick={() => modalCtx.dispatchModal({type: 'SET_TYPE', payload: 'CHECKOUT'}) }>Proceed to checkout</button>
                 <button onClick={() => cartCtx.dispatchCartItems({type: 'CLEAR'})}>Clear Cart</button>
             </div>
         </div>
