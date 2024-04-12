@@ -1,16 +1,25 @@
 import React from 'react'
 import { useContext } from 'react'
 import { CartContext } from '../context/cart-context'
-
+import { ModalContext } from '../context/modal-context'
 
 export default function Cart(props) {
     const cartCtx = useContext(CartContext)
+    const modalCtx = useContext(ModalContext)
+
+    const itemIncrementHandler = (item) => {
+        cartCtx.dispatchCartItems({type: 'ADD_ITEM', payload: item})
+    }   
+
+    const itemDecrementHandler = (item) => {
+        cartCtx.dispatchCartItems({type: 'REMOVE_ITEM', payload: item.id})
+    }
 
     return (
         <div className='cart'>
             <h2>Cart</h2>
             {cartCtx.items.amount === 0 && <p>No items in cart</p>}
-            {cartCtx &&
+            {cartCtx.items.types &&
                 <ul>{
                     cartCtx.items.types.map(item => {
                         return (
@@ -19,9 +28,9 @@ export default function Cart(props) {
                                 <div className='cart-item-price'>{item.price}</div>
                                 <div className='cart-item-quantity'>{item.quantity}</div>
                                 <div className='cart-item-actions'>
-                                    <button>-</button>
+                                    <button onClick={() => itemDecrementHandler(item)}>-</button>
                                     {item.amount}
-                                    <button>+</button>
+                                    <button onClick={() => itemIncrementHandler(item)}>+</button>
                                 </div>
                             </li>
                         )
@@ -34,7 +43,7 @@ export default function Cart(props) {
             </div>
             <div className='cart-actions'>
                 <button>Proceed to checkout</button>
-                <button onClick={cartCtx.clearCart}>Clear Cart</button>
+                <button onClick={() => cartCtx.dispatchCartItems({type: 'CLEAR'})}>Clear Cart</button>
             </div>
         </div>
     )

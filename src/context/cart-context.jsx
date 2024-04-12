@@ -58,58 +58,21 @@ export const CartProvider = ({children}) => {
                 amount: state.amount - 1
             };
         } else if (type === 'CLEAR') {
-            return CartContextDefaultValues;
+            return {
+                ...state,
+                types: [],
+                amount: 0,
+            };
         }
         return CartContextDefaultValues;
     }
     
-    // const addItemToCartHandler = (item) => {
-    //     setCartItems((prevCartItems) => {
-    //         const existingCartItem = prevCartItems.types.find((cartItem) => cartItem.id === item.id);
-    //         const existingCartItemIndex = prevCartItems.types.findIndex((cartItem) => cartItem.id === item.id);
-    //         const updatedCartItems = [...prevCartItems.types];
-            
-    //         if (existingCartItem) {
-    //             const updatedItem = {
-    //                 ...existingCartItem,
-    //                 amount: existingCartItem.amount + 1
-    //             };
-    //             updatedCartItems[existingCartItemIndex] = updatedItem;
-    //         } else {
-    //             const newItem = {...item, amount: 1};
-    //             updatedCartItems.push(newItem);
-    //         }
 
-    //         console.log(updatedCartItems);
-    //         return {
-    //             types: updatedCartItems,
-    //             amount: prevCartItems.amount + 1
-    //         };
-    //     });
-    // };
-
-    // const removeItemFromCartHandler = (id) => {
-    //     setCartItems((prevCartItems) => {
-    //         const existingCartItem = prevCartItems.find((cartItem) => cartItem.id === id);
-    //         const existingCartItemIndex = prevCartItems.findIndex((cartItem) => cartItem.id === id);
-    //         if (existingCartItem.amount === 1) {
-    //             return prevCartItems.filter((cartItem) => cartItem.id !== id);
-    //         } else {
-    //             const updatedItem = {
-    //                 ...existingCartItem,
-    //                 amount: existingCartItem.amount - 1
-    //             };
-    //             prevCartItems[existingCartItemIndex] = updatedItem;
-    //             return prevCartItems;
-    //         }
-    //     });
-    // };
-
-    // const clearCartHandler = () => {
-    //     setCartItems([]);
-    // };
 
     const getTotalPrice = () => {
+        if (!cartItems.types) {
+            return '0.00';
+        }
         const totalPrice = cartItems.types.reduce((acc, type) => {
             return Number(acc) +  Number(type.price) *  Number(type.amount);
         }, 0);
