@@ -10,7 +10,7 @@ export default function MealList(props) {
     const cartCtx = useContext(CartContext)
 
     const addItemToCartHandler = (item) => {
-        cartCtx.addItem(item)
+        cartCtx.dispatchCartItems({type: 'ADD_ITEM', payload: item})
     }
 
     useEffect(() => {
