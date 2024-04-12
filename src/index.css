@@ -274,3 +274,36 @@ h1 {
     transform: translate(-50%, -50%);
   }
 }
+
+.checkout {
+  color: #1d1a16;
+}
+
+.checkout input {
+  padding: 0.4rem;
+}
+
+.checkout label {
+  font-weight: bold;
+}
+
+.checkout-input {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  row-gap: 0.25rem;
+}
+
+.checkout-response {
+  margin: 1rem 0;
+  font-weight: bold;
+  color: #1d1a16;
+  padding: 0 3rem;
+  text-align: center;
+}
+
+.checkout-input__group {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+}
