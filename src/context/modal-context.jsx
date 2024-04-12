@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState, useReducer } from 'react';
 
 const ModalContextDefaultValues = {
     modalOpen: false,
@@ -10,43 +10,35 @@ const ModalContextDefaultValues = {
 export const ModalContext = createContext(ModalContextDefaultValues);
 
 export const ModalProvider = ({children}) => {
-    const [modal, setModal] = useState({
+    const [modal, dispatchModal] = useReducer(modalReducer, {
         modalOpen: false,
         modalType: ''
     });
 
-    const setModalClose = () => {
-        setModal(prevModal => {
+    function modalReducer(state, action) {
+        const {type, payload} = action;
+        if (type === 'OPEN') {
             return {
-                ...prevModal,
+                ...state,
+                modalType: payload,
+                modalOpen: true
+            };
+        } else if (type === 'CLOSE') {
+            return {
+                ...state,
                 modalOpen: false
             };
-        });
-    };
-
-    const setModalOpen = (type) => {
-        setModal(prevModal => {
+        } else if (type === 'SET_TYPE') {
             return {
-                ...prevModal,
-                modalOpen: true,
-                modalType: type
+                ...state,
+                modalType: payload
             };
-        });
-    };
-
-    const setModalType = (type) => {
-        setModalType(prevModal => {
-            return {
-                ...prevModal,
-                modalType: type
-            };
-        });
+        }
     }
 
     const modalContextProviderValues = {
         modal: modal,
-        setModalOpen,
-        setModalClose
+        dispatchModal
     };
 
     return (
