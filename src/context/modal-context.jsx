@@ -3,20 +3,20 @@ import { createContext, useState, useReducer, useCallback } from 'react';
 const ModalContextDefaultValues = {
     modalOpen: false,
     modalType: '',
-    setModalOpen: () => {},
-    setModalClose: () => {}
+    setModalOpen: () => { },
+    setModalClose: () => { }
 };
 
 export const ModalContext = createContext(ModalContextDefaultValues);
 
-export const ModalProvider = ({children}) => {
+export const ModalProvider = ({ children }) => {
     const [modal, dispatchModal] = useReducer(modalReducer, {
         modalOpen: false,
         modalType: ''
     });
 
     function modalReducer(state, action) {
-        const {type, payload} = action;
+        const { type, payload } = action;
         if (type === 'OPEN') {
             return {
                 ...state,
