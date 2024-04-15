@@ -64,7 +64,10 @@ export default function Checkout() {
                     <input type='text' id='city' name='city' required />
                 </div>
             </div>
-            <button className='button' type='submit'>Submit order</button>
+            <div className='checkout-submit'>
+                 <button className='button' onClick={() => modalCtx.dispatchModal({type: 'SET_TYPE', payload: 'CART'})}>Back</button>
+                 <button className='button checkout-submit__button' type='submit'>Submit order</button>
+            </div>
         </form>
     )
 }

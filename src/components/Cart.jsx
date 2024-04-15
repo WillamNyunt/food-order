@@ -25,7 +25,7 @@ export default function Cart(props) {
                         return (
                             <li key={item.id} className='cart-item'>
                                 <h3>{item.name}</h3>
-                                <div className='cart-item-price'>{item.price}</div>
+                                <div className='cart-item-price'>£ {item.price}</div>
                                 <div className='cart-item-quantity'>{item.quantity}</div>
                                 <div className='cart-item-actions'>
                                     <button onClick={() => itemDecrementHandler(item)}>-</button>
@@ -42,9 +42,10 @@ export default function Cart(props) {
                 {cartCtx.totalPrice > 0 ? <span>£{cartCtx.totalPrice}</span> : <div>£0</div>}
             </div>
             <div className='cart-actions'>
-                <button onClick={() => modalCtx.dispatchModal({type: 'SET_TYPE', payload: 'CHECKOUT'}) }>Proceed to checkout</button>
-                <button onClick={() => cartCtx.dispatchCartItems({type: 'CLEAR'})}>Clear Cart</button>
+            <button className='button' onClick={() => cartCtx.dispatchCartItems({type: 'CLEAR'})}>Clear Cart</button>
+                <button className='button' onClick={() => modalCtx.dispatchModal({type: 'SET_TYPE', payload: 'CHECKOUT'}) }>Proceed to checkout</button>
             </div>
+            <button className='button' onClick={() => modalCtx.dispatchModal({type: 'CLOSE'})}>Cancel</button>
         </div>
     )
 }

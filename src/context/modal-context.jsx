@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer } from 'react';
+import { createContext, useState, useReducer, useCallback } from 'react';
 
 const ModalContextDefaultValues = {
     modalOpen: false,
@@ -38,7 +38,7 @@ export const ModalProvider = ({children}) => {
 
     const modalContextProviderValues = {
         modal: modal,
-        dispatchModal
+        dispatchModal,
     };
 
     return (

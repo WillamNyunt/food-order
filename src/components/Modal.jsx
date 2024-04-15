@@ -9,7 +9,6 @@ export default function Modal({children}) {
     return createPortal(
         <Dialog open={modalCtx.modal.modalOpen} onClose={() => modalCtx.dispatchModal({type: 'CLOSE'})} className="modal">
             {children}
-            <button onClick={() => modalCtx.dispatchModal({type: 'CLOSE'})}>Cancel</button>
         </Dialog>,
         document.getElementById('modal')
     )
