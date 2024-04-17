@@ -1,4 +1,4 @@
-import React, { createContext, useState, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 
 const CartContextDefaultValues = {
     items: {types: [], amount: 0},
@@ -32,7 +32,6 @@ export const CartProvider = ({children}) => {
                 const updatedItem = { ...payload, amount: 1 }
                 updatedItems = state.types.concat(updatedItem);
             }
-            console.log(updatedItems)
             return {
                 ...state,
                 types: updatedItems,
