@@ -1,17 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState, useCallback} from 'react'
 import MealCard from './MealCard'
 import { CartContext } from '../context/cart-context'
 
 export default function MealList(props) {
     const [meals, setMeals] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [httpError, setHttpError] = useState(null)
 
     const cartCtx = useContext(CartContext)
 
-    const addItemToCartHandler = (item) => {
+    const addItemToCartHandler = useCallback((item) => {
         cartCtx.dispatchCartItems({type: 'ADD_ITEM', payload: item})
-    }
+    })
 
     useEffect(() => {
         fetch('http://localhost:3000/meals')
@@ -19,7 +17,6 @@ export default function MealList(props) {
         .then(data => {
             setMeals(data)})
     }, [])
-
 
 
     return (
